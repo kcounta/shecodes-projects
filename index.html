@@ -3,11 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 6, L3</title>
+    <title>Weather App</title>
     <link rel="stylesheet" href="src/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&family=Source+Sans+Pro:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <h1>Week 6, L3</h1>
+    <div class="container">
+      <h1>Weather Forecast</h1>
+      <main>
+        <header>
+          <form>
+            <input
+              id="city-input"
+              type="search"
+              placeholder="Please enter a city"
+            />
+            <button type="submit" id="search-button"></button>
+            <button type="submit" id="current-location-button">
+              Get Current Location
+            </button>
+          </form>
+        </header>
+        <div class="wrapper">
+          <div class="weather current">
+            <h2 id="city" class="city-title"></h2>
+            <div class="weather-overview">
+              <div class="weather-info today">
+                <div id="temperature"></div>
+                <div class="city-details">
+                  <div class="details">
+                    <div id="date"></div>
+                    <div id="description"></div>
+                  </div>
+
+                  <div class="details">
+                    <div id="humidity"></div>
+                    <div id="wind"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="weather-info"></div>
+              <div class="weather-info"></div>
+            </div>
+          </div>
+
+          <div class="weather future">
+            <div class="weather-info"></div>
+            <div class="weather-info"></div>
+            <div class="weather-info"></div>
+            <div class="weather-info"></div>
+            <div class="weather-info"></div>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
   <script src="src/script.js"></script>
 </html>
