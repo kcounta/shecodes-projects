@@ -21,6 +21,9 @@ function getCityDetails(response) {
   let cityDesc = document.querySelector("#description");
   cityDesc.innerHTML = response.data.list[0].weather[0].description;
 
+  let cityTempIcon = document.querySelector("#temp-icon");
+  cityTempIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png" />`;
+
   let cityTemp = document.querySelector("#temperature");
   cityTemp.innerHTML = `${Math.round(response.data.list[0].main.temp)}°C`;
 
