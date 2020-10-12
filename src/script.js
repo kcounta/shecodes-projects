@@ -27,6 +27,7 @@ function getFormattedDate(timestamp) {
   let wDay = wDays[cDate.getDay()];
   let hours = cDate.getHours();
   let mins = cDate.getMinutes();
+
   if (hours < 10) {
     hours = `0${hours}`;
   }
@@ -40,6 +41,7 @@ function getFormattedDate(timestamp) {
 }
 
 function getCityDetails(response) {
+  console.log(response.data);
   let cityName = document.querySelector("#city");
   cityName.innerHTML = response.data.city.name;
 
@@ -47,7 +49,14 @@ function getCityDetails(response) {
   cityDesc.innerHTML = response.data.list[0].weather[0].description;
 
   let cityTempIcon = document.querySelector("#temp-icon");
-  cityTempIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png" />`;
+  cityTempIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
+  );
+  cityTempIcon.setAttribute(
+    "alt",
+    response.data.list[0].weather[0].description
+  );
 
   let cityTemp = document.querySelector("#temperature");
   cityTemp.innerHTML = `${Math.round(response.data.list[0].main.temp)}°C`;
@@ -63,7 +72,7 @@ function getCityDetails(response) {
   )}km/h`;
 
   let cityDate = document.querySelector("#date");
-  cityDate.innerHTML = getFormattedDate(response.data.list[0].dt * 1000);
+  cityDate.innerHTML = getFormattedDate(response.data.city.timezone * 1000);
 }
 
 let searchButton = document.querySelector("#search-button");
