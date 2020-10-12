@@ -13,8 +13,33 @@ function searchCity(event) {
   }
 }
 
+function getFormattedDate(timestamp) {
+  let cDate = new Date(timestamp);
+  let wDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let wDay = wDays[cDate.getDay()];
+  let hours = cDate.getHours();
+  let mins = cDate.getMinutes();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  if (mins < 10) {
+    mins = `0${mins} `;
+  }
+  let cTime = `${hours}:${mins} `;
+
+  return `${wDay} ${cTime}`;
+}
+
 function getCityDetails(response) {
-  console.log(response);
   let cityName = document.querySelector("#city");
   cityName.innerHTML = response.data.city.name;
 
@@ -37,28 +62,8 @@ function getCityDetails(response) {
     response.data.list[0].wind.speed
   )}km/h`;
 
-  //GET DATE
-  let cDate = new Date();
-  let wDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let wDay = wDays[cDate.getDay()];
-  let weekDay = document.querySelector("#date");
-  let hours = cDate.getHours();
-  let mins = cDate.getMinutes();
-  let cTime = `${hours}:${mins} `;
-
-  if (mins < 10) {
-    cTime = `${hours}:0${mins} `;
-  }
-
-  weekDay.innerHTML = `${wDay} ${cTime}`;
+  let cityDate = document.querySelector("#date");
+  cityDate.innerHTML = getFormattedDate(response.data.list[0].dt * 1000);
 }
 
 let searchButton = document.querySelector("#search-button");

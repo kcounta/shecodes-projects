@@ -113,6 +113,9 @@ header input[type="search"] {
   display: flex;
   align-items: center;
   padding: 20px 25px 20px 0;
+}
+
+.city-details div:first-letter {
   text-transform: capitalize;
 }
 
