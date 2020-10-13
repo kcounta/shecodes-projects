@@ -59,6 +59,11 @@ main {
   text-transform: none;
   font-family: "Sansita Swashed", cursive;
 }
+
+.hidden {
+  display: none;
+}
+
 header button {
   height: 40px;
   width: 50px;
@@ -107,6 +112,7 @@ header input[type="search"] {
 
 .wrapper {
   margin: 3em 0 0;
+  visibility: hidden;
 }
 
 .weather-info {
@@ -125,12 +131,41 @@ header input[type="search"] {
 
 .weather-info .temp {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 #temperature {
   font-size: 4em;
   letter-spacing: -3px;
+}
+
+.temp-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.temp-units {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 10px;
+}
+
+.temp-units a {
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.temp-units a:hover {
+  font-weight: 700;
+}
+
+.temp-units .celsius {
+  border-right: 1px solid;
+  padding: 0 10px 0 0;
+}
+
+.temp-units .fahrenheit {
+  padding: 0 0 0 5px;
 }
 
 .city-details {

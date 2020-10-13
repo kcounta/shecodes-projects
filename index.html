@@ -16,14 +16,15 @@
       <h1>Weather Forecast</h1>
       <main>
         <header>
-          <form>
+          <form id="weather-form">
             <input
               id="city-input"
               type="search"
               placeholder="Please enter a city"
+              autocomplete="off"
             />
             <button type="submit" id="search-button"></button>
-            <button type="submit" id="current-location-button">
+            <button type="button" id="current-location-button">
               Get Current Location
             </button>
           </form>
@@ -34,8 +35,14 @@
             <div class="weather-overview">
               <div class="weather-info today">
                 <div class="temp">
-                  <div id="temp-icon"></div>
-                  <div id="temperature"></div>
+                  <img id="temp-icon" />
+                  <div class="temp-container">
+                    <div id="temperature"></div>
+                    <div class="temp-units">
+                      <a href="#" class="celsius">°C</a
+                      ><a href="#" class="fahrenheit">°F</a>
+                    </div>
+                  </div>
                 </div>
                 <div class="city-details">
                   <div class="details">
