@@ -1,18 +1,7 @@
 let apiURL = "https://api.openweathermap.org/data/2.5/forecast";
 let apiKEY = "2c7be81cdfd4348e785209fd2490e8d1";
 
-function searchCity(event) {
-  event.preventDefault();
-  let cityEntry = document.querySelector("#city-input").value;
-  if (cityEntry) {
-    axios
-      .get(`${apiURL}?q=${cityEntry}&units=metric&appid=${apiKEY}`)
-      .then(getCityDetails);
-  } else {
-    alert("Please enter a city");
-  }
-}
-
+//DATE
 function getFormattedDate(timestamp) {
   let cDate = new Date(timestamp);
   let wDays = [
@@ -33,13 +22,14 @@ function getFormattedDate(timestamp) {
   }
 
   if (mins < 10) {
-    mins = `0${mins} `;
+    mins = `0${mins}`;
   }
-  let cTime = `${hours}:${mins} `;
+  let cTime = `${hours}:${mins}`;
 
   return `${wDay} ${cTime}`;
 }
 
+//CITY INFORMATION
 function getCityDetails(response) {
   console.log(response.data);
   let cityName = document.querySelector("#city");
@@ -75,8 +65,21 @@ function getCityDetails(response) {
   cityDate.innerHTML = getFormattedDate(response.data.city.timezone * 1000);
 }
 
-let searchButton = document.querySelector("#search-button");
-searchButton.addEventListener("click", searchCity);
+//SEARCH
+function searchCity(event) {
+  event.preventDefault();
+  let cityEntry = document.querySelector("#city-input").value;
+  if (cityEntry) {
+    axios
+      .get(`${apiURL}?q=${cityEntry}&units=metric&appid=${apiKEY}`)
+      .then(getCityDetails);
+  } else {
+    alert("Please enter a city");
+  }
+}
+
+let searchForm = document.querySelector("#weather-form");
+searchForm.addEventListener("submit", searchCity);
 
 //GET CURRENT LOCATION
 function getCurrentLocation(event) {
