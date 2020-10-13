@@ -32,6 +32,9 @@ function getFormattedDate(timestamp) {
 //CITY INFORMATION
 function getCityDetails(response) {
   console.log(response.data);
+  let cityWrapper = document.querySelector(".wrapper");
+  cityWrapper.style.visibility = "visible";
+
   let cityName = document.querySelector("#city");
   cityName.innerHTML = response.data.city.name;
 
@@ -49,7 +52,11 @@ function getCityDetails(response) {
   );
 
   let cityTemp = document.querySelector("#temperature");
-  cityTemp.innerHTML = `${Math.round(response.data.list[0].main.temp)}°C`;
+
+  let cityTempCelsius = Math.round(response.data.list[0].main.temp);
+  let cityTempFahrenheit = Math.round((`${cityTempCelsius}` * 9) / 5 + 32);
+
+  cityTemp.innerHTML = `<div class="celsius-value">${cityTempCelsius}</div><div class="fahr-value hidden">${cityTempFahrenheit}</div>`;
 
   let cityHumidity = document.querySelector("#humidity");
   cityHumidity.innerHTML = `Humidity: ${Math.round(
@@ -63,6 +70,8 @@ function getCityDetails(response) {
 
   let cityDate = document.querySelector("#date");
   cityDate.innerHTML = getFormattedDate(response.data.city.timezone * 1000);
+
+  tempConversion();
 }
 
 //SEARCH
@@ -80,6 +89,30 @@ function searchCity(event) {
 
 let searchForm = document.querySelector("#weather-form");
 searchForm.addEventListener("submit", searchCity);
+
+//TEMP CONVERSION
+function tempConversion() {
+  let celsiusElement = document.querySelector(".celsius-value");
+  let fahrElement = document.querySelector(".fahr-value");
+
+  function showFahrenheitValue(event) {
+    event.preventDefault();
+    celsiusElement.classList.add("hidden");
+    fahrElement.classList.remove("hidden");
+  }
+
+  function showCelsiusValue(event) {
+    event.preventDefault();
+    fahrElement.classList.add("hidden");
+    celsiusElement.classList.remove("hidden");
+  }
+
+  let fahrenheitElememt = document.querySelector(".temp-units .fahrenheit");
+  fahrenheitElememt.addEventListener("click", showFahrenheitValue);
+
+  let celsiusElememt = document.querySelector(".temp-units .celsius");
+  celsiusElememt.addEventListener("click", showCelsiusValue);
+}
 
 //GET CURRENT LOCATION
 function getCurrentLocation(event) {
