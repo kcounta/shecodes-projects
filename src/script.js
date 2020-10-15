@@ -28,7 +28,6 @@ function searchCity(event) {
 }
 
 function getForecastDetails(response) {
-  console.log(response.data);
   let forecastContainer = document.querySelector(".weather.forecast");
   forecastContainer.innerHTML = null;
   let forecast = null;
@@ -167,7 +166,7 @@ function tempConversion() {
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getCoords);
-  
+
   let forecastSection = document.querySelector(".weather.forecast")
   forecastSection.innerHTML = null;
   
