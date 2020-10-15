@@ -58,14 +58,11 @@ function getForecastDetails(response) {
   `;
 
   }
-
-
-
 }
 
 //CITY INFORMATION
 function getCityDetails(response) {
-  console.log(response.data);
+
   let cityWrapper = document.querySelector(".wrapper");
   cityWrapper.style.visibility = "visible";
 
@@ -170,6 +167,10 @@ function tempConversion() {
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getCoords);
+  
+  let forecastSection = document.querySelector(".weather.forecast")
+  forecastSection.innerHTML = null;
+  
 }
 function getCoords(position) {
   let lat = position.coords.latitude;
