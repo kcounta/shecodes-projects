@@ -29,6 +29,38 @@ function searchCity(event) {
 
 function getForecastDetails(response) {
   console.log(response.data);
+  let forecastContainer = document.querySelector(".weather.forecast");
+  forecastContainer.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    let forecast = response.data.list[index];
+
+      forecastContainer.innerHTML += `
+      <div class="weather-info">
+        <ul>
+          <li class="hour">
+            ${getFormattedHours((forecast.dt)*1000)}
+          </li>
+          <li class="icon">
+            <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
+          </li>
+          <li>
+            <span class="max">
+              ${Math.round(forecast.main.temp_max)}°
+              </span>
+            <span class="min">
+              ${Math.round(forecast.main.temp_min)}°
+            </span>
+          </li>
+        </ul>
+      </div>
+  `;
+
+  }
+
+
+
 }
 
 //CITY INFORMATION
@@ -73,6 +105,26 @@ function getCityDetails(response) {
 
 let searchForm = document.querySelector("#weather-form");
 searchForm.addEventListener("submit", searchCity);
+
+function getFormattedHours(timestamp){
+  let cDate = new Date(timestamp);
+
+  let hours = cDate.getHours();
+  let mins = cDate.getMinutes();
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  if (mins < 10) {
+    mins = `0${mins}`;
+  }
+
+  return `${hours}:${mins}`;
+
+  //return `${wDay} ${cTime}`;
+}
+
 //DATE
 function getFormattedDate(timestamp) {
   let cDate = new Date(timestamp);
@@ -86,19 +138,8 @@ function getFormattedDate(timestamp) {
     "Saturday",
   ];
   let wDay = wDays[cDate.getDay()];
-  let hours = cDate.getHours();
-  let mins = cDate.getMinutes();
-
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-
-  if (mins < 10) {
-    mins = `0${mins}`;
-  }
-  let cTime = `${hours}:${mins}`;
-
-  return `${wDay} ${cTime}`;
+  
+  return `${wDay} ${getFormattedHours(timestamp)}`;
 }
 
 //TEMP CONVERSION
