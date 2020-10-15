@@ -23,6 +23,7 @@ h1 {
 h2 {
   font-size: 2.3em;
   text-decoration: underline;
+  text-align: center;
 }
 
 a {
@@ -61,7 +62,7 @@ main {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 header button {
@@ -94,6 +95,11 @@ footer {
   line-height: 1;
   color: white;
   border-radius: 2px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 70px;
+  position: absolute;
 }
 
 .container {
@@ -106,19 +112,23 @@ header {
 
 header input[type="search"] {
   vertical-align: top;
-  width: calc(100% - 207px);
+  width: calc(100% - 65px);
   text-transform: capitalize;
 }
 
 .wrapper {
-  margin: 3em 0 0;
+  margin: 7em 0 0;
   visibility: hidden;
+}
+
+#weather-form {
+  position: relative;
 }
 
 .weather-info {
   display: flex;
   align-items: center;
-  padding: 20px 25px 20px 0;
+  padding: 20px 25px 40px 0;
 }
 
 .city-details div:first-letter {
@@ -126,7 +136,7 @@ header input[type="search"] {
 }
 
 .weather-info.today {
-  max-width: 75%;
+  flex-direction: column;
 }
 
 .weather-info .temp {
@@ -178,4 +188,55 @@ header input[type="search"] {
   margin: 0 30px 0 0;
   font-size: 1.2em;
   line-height: 1.5;
+}
+
+.weather.forecast {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 50px 0;
+  border-top: 2px solid;
+  flex-wrap: wrap;
+}
+
+.weather.forecast .weather-info {
+  padding: 0;
+}
+
+.weather-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+@media (min-width: 769px) {
+  h2 {
+    text-align: left;
+  }
+
+  .weather-info.today {
+    max-width: 75%;
+    flex-direction: row;
+  }
+
+  header input[type="search"] {
+    width: calc(100% - 207px);
+  }
+
+  #current-location-button {
+    position: static;
+  }
+
+  header {
+    margin: 4em 0 0;
+  }
+
+  .wrapper {
+    margin: 3em 0 0;
+  }
+
+  .weather.forecast {
+    justify-content: space-between;
+  }
 }
