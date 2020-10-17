@@ -37,6 +37,7 @@ input {
   border-bottom: 2px solid #222;
   padding: 0 10px;
   font-size: 1.1em;
+  -webkit-appearance: none;
 }
 
 main {
