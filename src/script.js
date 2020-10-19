@@ -118,7 +118,6 @@ function getFormattedHours(timestamp){
 
   return `${hours}:${mins}`;
 
-  //return `${wDay} ${cTime}`;
 }
 
 //DATE
@@ -166,18 +165,28 @@ function tempConversion() {
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getCoords);
-
-  let forecastSection = document.querySelector(".weather.forecast")
-  forecastSection.innerHTML = null;
-  
 }
+
+
 function getCoords(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
   axios
-    .get(`${apiURL}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKEY}`)
-    .then(getCityDetails);
+          
+    .all([
+        axios.get(`${apiURL}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKEY}`),
+        axios.get(
+          `${apiForecastURL}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKEY}`
+        ),
+      ])
+      .then(
+        axios.spread((current, forecast) => {
+          getCityDetails(current);
+          getForecastDetails(forecast);
+        })
+      );
+
 }
 let currentButton = document.querySelector("#current-location-button");
 currentButton.addEventListener("click", getCurrentLocation);
